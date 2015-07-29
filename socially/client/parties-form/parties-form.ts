@@ -28,7 +28,7 @@ export class PartiesForm {
     // validate if the form is valid
     if (this.partiesForm.valid) {
 
-      partyService.add(this.partiesForm.value);
+      this.partyService.add(this.partiesForm.value);
 
       //reset input values to empty strings
       this.partiesForm.controls.name.updateValue('');
