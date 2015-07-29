@@ -10,6 +10,9 @@ import {formDirectives} from 'angular2/angular2';
   directives: [routerDirectives, formDirectives]
 })
 export class PartyDetails {
+  partyId: string;
+  resetToParty: IParty;
+  party: IParty;
   constructor(@Inject(RouteParams) routeParams:RouteParams) {
     this.partyId = routeParams.params.partyId;
   }
