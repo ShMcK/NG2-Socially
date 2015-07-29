@@ -1,6 +1,7 @@
 import {Component, View, bind, bootstrap} from 'angular2/angular2';
 import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
 import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5Location Strategy
+
 // Components
 import {PartiesList} from 'client/parties-list/parties-list';
 import {PartyDetails} from 'client/party-details/party-details';
