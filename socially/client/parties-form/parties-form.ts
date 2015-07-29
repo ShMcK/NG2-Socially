@@ -27,8 +27,8 @@ export class PartiesForm {
       });
 
       //reset input values to empty strings
-      this.partyForm.controls.name.updateValue('');
-      this.partyForm.controls.description.updateValue('');
+      this.partiesForm.controls.name.updateValue('');
+      this.partiesForm.controls.description.updateValue('');
     }
   }
 }
