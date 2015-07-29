@@ -52,6 +52,6 @@ The demo following the Meteor - Angular 2 tutorial at [Angular-Meteor.com](http:
 
     git checkout -f step-09
     
-10. [Deploying your app](http://angular-meteor.com/tutorials/angular2/deploying-your-app) WIP
+10. [Deploying your app](http://angular-meteor.com/tutorials/angular2/deploying-your-app)
 
     git checkout -f step-10
