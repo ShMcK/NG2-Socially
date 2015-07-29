@@ -43,7 +43,7 @@ export class PartyDetails {
       return true;
     }
   }
-  onDeactivate() {
+  canDeactivate() {
     // not working, not sure why.
     if (_.isEqual(this.party, this.resetToParty)) {
       return confirm("Are you sure you want to leave without saving?");
