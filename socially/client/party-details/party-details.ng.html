@@ -9,3 +9,10 @@
   <button (click)="reset($event)">Reset form</button>
   <button [router-link]="['/parties-list']">Cancel</button>
 </form>
+
+<ul>
+  Users:
+  <li *ng-for="#user of users">
+    <div>{{ user.emails[0].address }}</div>
+  </li>
+</ul>

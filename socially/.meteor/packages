@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 shmck:angular2
 netanelgilad:angular2-typescript
 shmck:angular2-router

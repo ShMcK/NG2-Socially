@@ -1,4 +1,4 @@
-import {Component, View, Inject} from 'angular2/angular2';
+import {Component, View, Inject, NgFor} from 'angular2/angular2';
 import {RouteParams, routerDirectives} from 'angular2/router';
 import {formDirectives} from 'angular2/angular2';
 import {PartyService} from 'client/lib/party-service';
@@ -9,13 +9,14 @@ import {PartyService} from 'client/lib/party-service';
 })
 @View({
   templateUrl: 'client/party-details/party-details.ng.html',
-  directives: [routerDirectives, formDirectives]
+  directives: [routerDirectives, formDirectives, NgFor]
 })
 export class PartyDetails {
   partyId: string;
   resetToParty: IParty;
   party: IParty;
   partyService:PartyService;
+  users;
   constructor(@Inject(RouteParams) routeParams:RouteParams, @Inject(PartyService) partyService:PartyService) {
     this.partyId = routeParams.params.partyId;
     this.partyService = partyService;
@@ -44,6 +45,8 @@ export class PartyDetails {
   }
 
   onActivate() {
+    Meteor.subscribe('parties', this.partyId);
+    this.users = Meteor.users;
     this.party = Parties.find(this.partyId).fetch()[0];
     if (this.party) {
       this.resetToParty = _.clone(this.party);

@@ -40,15 +40,15 @@ The demo following the Meteor - Angular 2 tutorial at [Angular-Meteor.com](http:
 
     git checkout -f step-06
     
-07. [Folder structure](http://angular-meteor.com/tutorials/angular2/folder-structure) WIP
+07. [Folder structure](http://angular-meteor.com/tutorials/angular2/folder-structure)
 
     git checkout -f step-07
     
-08. [User accounts & Permissions](http://angular-meteor.com/tutorials/angular2/user-accounts-authentication-and-permissions) WIP
+08. [User accounts & Permissions](http://angular-meteor.com/tutorials/angular2/user-accounts-authentication-and-permissions)
 
     git checkout -f step-08
     
-09. [Privacy: publish & subscribe](http://angular-meteor.com/tutorials/angular2/privacy-and-publish-subscribe-functions) WIP
+09. [Privacy: publish & subscribe](http://angular-meteor.com/tutorials/angular2/privacy-and-publish-subscribe-functions)
 
     git checkout -f step-09
     
