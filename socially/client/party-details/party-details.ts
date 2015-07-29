@@ -23,19 +23,28 @@ export class PartyDetails {
         description: party.description
       });
 
-      this.reset();
+      this.resetToParty = _.clone(party);
     }
   }
 
-  reset() {
-    this.party = this.originalParty;
+  reset(event) {
+    // stops field reset
+    event.preventDefault();
+    this.party = this.resetToParty;
   }
 
   onActivate() {
     this.party = Parties.find(this.partyId).fetch()[0];
     if (this.party) {
-      this.originalParty = this.party;
+      this.resetToParty = _.clone(this.party);
       return true;
     }
   }
+  onDeactivate() {
+    // not working, not sure why.
+    if (_.isEqual(this.party, this.resetToParty)) {
+      return confirm("Are you sure you want to leave without saving?");
+    }
+  }
 }
+

@@ -6,6 +6,6 @@
   <input type="text" [(ng-model)]="party.description" id="description">
 
   <button type="submit">Save</button>
-  <button>Reset form</button>
+  <button (click)="reset($event)">Reset form</button>
   <button [router-link]="['/parties-list']">Cancel</button>
 </form>
