@@ -1,9 +1,11 @@
 import {Component, View, Inject} from 'angular2/angular2';
 import {RouteParams, routerDirectives} from 'angular2/router';
 import {formDirectives} from 'angular2/angular2';
+import {PartyService} from 'client/lib/party-service';
 
 @Component({
-  selector: 'party-details'
+  selector: 'party-details',
+  viewInjector: [PartyService]
 })
 @View({
   templateUrl: 'client/party-details/party-details.ng.html',
@@ -13,19 +15,16 @@ export class PartyDetails {
   partyId: string;
   resetToParty: IParty;
   party: IParty;
-  constructor(@Inject(RouteParams) routeParams:RouteParams) {
+  partyService:PartyService;
+  constructor(@Inject(RouteParams) routeParams:RouteParams, @Inject(PartyService) partyService:PartyService) {
     this.partyId = routeParams.params.partyId;
+    this.partyService = partyService;
   }
 
   add(party) {
 
     if (party.name.length && party.description.length) {
-      // insert parties (insecure way)
-      Parties.update(party._id, {
-        name: party.name,
-        description: party.description
-      });
-
+      this.partyService.update(party);
       this.resetToParty = _.clone(party);
     }
   }
@@ -36,6 +35,14 @@ export class PartyDetails {
     this.party = this.resetToParty;
   }
 
+  canActivate() {
+    if (!Meteor.userId()) {
+      alert('Please login first');
+      return false;
+    }
+    return true;
+  }
+
   onActivate() {
     this.party = Parties.find(this.partyId).fetch()[0];
     if (this.party) {
@@ -43,7 +50,7 @@ export class PartyDetails {
       return true;
     }
   }
-  onDeactivate() {
+  canDeactivate() {
     // not working, not sure why.
     if (_.isEqual(this.party, this.resetToParty)) {
       return confirm("Are you sure you want to leave without saving?");
