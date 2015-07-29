@@ -10,6 +10,9 @@ import {formDirectives} from 'angular2/angular2';
   directives: [routerDirectives, formDirectives]
 })
 export class PartyDetails {
+  partyId: string;
+  resetToParty: IParty;
+  party: IParty;
   constructor(@Inject(RouteParams) routeParams:RouteParams) {
     this.partyId = routeParams.params.partyId;
   }
@@ -23,19 +26,28 @@ export class PartyDetails {
         description: party.description
       });
 
-      this.reset();
+      this.resetToParty = _.clone(party);
     }
   }
 
-  reset() {
-    this.party = this.originalParty;
+  reset(event) {
+    // stops field reset
+    event.preventDefault();
+    this.party = this.resetToParty;
   }
 
   onActivate() {
     this.party = Parties.find(this.partyId).fetch()[0];
     if (this.party) {
-      this.originalParty = this.party;
+      this.resetToParty = _.clone(this.party);
       return true;
     }
   }
+  canDeactivate() {
+    // not working, not sure why.
+    if (_.isEqual(this.party, this.resetToParty)) {
+      return confirm("Are you sure you want to leave without saving?");
+    }
+  }
 }
+

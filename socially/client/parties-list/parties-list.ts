@@ -10,9 +10,13 @@ import {PartiesForm} from 'client/parties-form/parties-form';
   directives: [NgFor, routerDirectives, PartiesForm]
 })
 export class PartiesList {
+  parties: IParty[];
   constructor() {
     Tracker.autorun(zone.bind(() => {
       this.parties = Parties.find().fetch();
     }));
+  }
+  remove(party) {
+    Parties.remove(party._id);
   }
 }

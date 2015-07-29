@@ -15,10 +15,13 @@ export class PartiesForm {
       description: new Control('', Validators.required)
     });
   }
-  add(party) {
+  add() {
 
     // validate if the form is valid
     if (this.partiesForm.valid) {
+
+      // get the party value
+      var party = this.partiesForm.value;
 
       // insert parties (insecure way)
       Parties.insert({
@@ -27,8 +30,8 @@ export class PartiesForm {
       });
 
       //reset input values to empty strings
-      this.partyForm.controls.name.updateValue('');
-      this.partyForm.controls.description.updateValue('');
+      this.partiesForm.controls.name.updateValue('');
+      this.partiesForm.controls.description.updateValue('');
     }
   }
 }
