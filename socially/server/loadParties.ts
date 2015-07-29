@@ -1,16 +1,7 @@
-import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+Meteor.startup(function () {
+  if (Parties.find().count() === 0) {
 
-@Component({
-  selector: 'app'
-})
-@View({
-  templateUrl: 'client/index.ng.html',
-  directives: [NgFor]
-})
-class Socially {
-  constructor () {
-    this.parties = Parties.find().fetch();
-    this.parties = [
+    var parties = [
       {'name': 'Dubstep-Free Zone',
         'description': 'Can we please just for an evening not listen to dubstep.'},
       {'name': 'All dubstep all the time',
@@ -18,9 +9,8 @@ class Socially {
       {'name': 'Savage lounging',
         'description': 'Leisure suit required. And only fiercest manners.'}
     ];
+
+    for (var i = 0; i < parties.length; i++)
+      Parties.insert(parties[i]);
   }
-}
-
-bootstrap(Socially);
-
-
+});
