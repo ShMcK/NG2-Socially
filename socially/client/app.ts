@@ -1,26 +1,25 @@
-import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+import {Component, View, bind, bootstrap} from 'angular2/angular2';
+import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
+import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5Location Strategy
+// Components
+import {PartiesList} from 'client/parties-list/parties-list';
+import {PartyDetails} from 'client/party-details/party-details';
 
 @Component({
   selector: 'app'
 })
 @View({
-  templateUrl: 'client/index.ng.html',
-  directives: [NgFor]
+  template: '<router-outlet></router-outlet>',
+  directives: [routerDirectives]
 })
-class Socially {
-  constructor () {
-    this.parties = Parties.find().fetch();
-    this.parties = [
-      {'name': 'Dubstep-Free Zone',
-        'description': 'Can we please just for an evening not listen to dubstep.'},
-      {'name': 'All dubstep all the time',
-        'description': 'Get it on!'},
-      {'name': 'Savage lounging',
-        'description': 'Leisure suit required. And only fiercest manners.'}
-    ];
-  }
-}
+@RouteConfig([
+  {path: '/',  as: 'parties-list', component: PartiesList},
+  {path: '/party/:partyId', as: 'party-details', component: PartyDetails}
+])
+class Socially {}
 
-bootstrap(Socially);
-
-
+bootstrap(Socially, [
+  routerInjectables,
+  bind(LocationStrategy).toClass(HashLocationStrategy)
+  //hashbang alternative: bind(LocationStrategy).toClass(HTML5LocationStrategy)
+]);
