@@ -19,7 +19,7 @@ export class PartyService {
     return {
       name: party.name,
       description: party.description,
-      user: Meteor.userId()
+      owner: Meteor.userId()
     };
   }
 }
